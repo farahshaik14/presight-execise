@@ -1,0 +1,98 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  --canvas: #f7f4fc;
+  --surface: #ffffff;
+  --surface-2: #f3eefc;
+  --line: #e6def6;
+  --ink: #2a2238;
+  --muted: #74698a;
+  --accent: #8b6fd6;
+  --accent-strong: #6f52c4;
+  --accent-soft: #ede6fb;
+  --accent-ink: #5b3fb0;
+  --glow-1: rgb(167 139 250 / 0.28);
+  --glow-2: rgb(244 172 230 / 0.22);
+  color-scheme: light;
+}
+
+.dark {
+  --canvas: #13101b;
+  --surface: #1c1727;
+  --surface-2: #251f33;
+  --line: #342b47;
+  --ink: #ece8f5;
+  --muted: #a59bb8;
+  --accent: #a993e3;
+  --accent-strong: #c4b4f2;
+  --accent-soft: #2e2546;
+  --accent-ink: #d3c7f7;
+  --glow-1: rgb(139 111 214 / 0.22);
+  --glow-2: rgb(190 90 170 / 0.14);
+  color-scheme: dark;
+}
+
+@theme inline {
+  --color-canvas: var(--canvas);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-line: var(--line);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-accent: var(--accent);
+  --color-accent-strong: var(--accent-strong);
+  --color-accent-soft: var(--accent-soft);
+  --color-accent-ink: var(--accent-ink);
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  background-color: var(--canvas);
+  background-image:
+    radial-gradient(60rem 30rem at -10% -10%, var(--glow-1), transparent 60%),
+    radial-gradient(50rem 30rem at 110% -20%, var(--glow-2), transparent 60%);
+  background-attachment: fixed;
+  color: var(--ink);
+  font-family: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--line) transparent;
+}
+
+@keyframes shimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.skeleton {
+  position: relative;
+  overflow: hidden;
+  background: var(--surface-2);
+}
+
+.skeleton::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  transform: translateX(-100%);
+  background: linear-gradient(90deg, transparent, color-mix(in oklab, var(--surface) 60%, transparent), transparent);
+  animation: shimmer 1.4s infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skeleton::after {
+    animation: none;
+  }
+}
