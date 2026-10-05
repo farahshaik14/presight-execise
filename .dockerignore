@@ -1,0 +1,13 @@
+**/node_modules
+**/dist
+**/data
+**/*.db
+**/*.db-*
+.git
+.gitignore
+.dockerignore
+Dockerfile
+docker-compose.yml
+*.md
+**/.DS_Store
+**/*.log
