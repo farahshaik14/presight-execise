@@ -1,13 +1,29 @@
 {
   "name": "presight-server",
   "version": "1.0.0",
-  "main": "index.js",
+  "private": true,
+  "type": "module",
   "license": "MIT",
+  "engines": {
+    "node": ">=22.13"
+  },
+  "scripts": {
+    "dev": "node --disable-warning=ExperimentalWarning --import tsx --watch src/index.ts",
+    "seed": "node --disable-warning=ExperimentalWarning --import tsx src/seed.ts",
+    "build": "rm -rf dist && tsc -p tsconfig.build.json && cp src/db/schema.sql dist/db/",
+    "start": "node --disable-warning=ExperimentalWarning dist/index.js",
+    "seed:prod": "node --disable-warning=ExperimentalWarning dist/seed.js",
+    "test": "NODE_ENV=test node --disable-warning=ExperimentalWarning --import tsx --test \"test/**/*.test.ts\"",
+    "typecheck": "tsc"
+  },
   "dependencies": {
+    "@faker-js/faker": "^10.6.0",
     "express": "~5.1.0"
   },
   "devDependencies": {
     "@types/express": "~5.0.1",
-    "@types/node-fetch": "~2.6.12"
+    "@types/node": "^26.6.3",
+    "tsx": "^4.23.15",
+    "typescript": "^7.0.2"
   }
 }
