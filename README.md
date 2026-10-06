@@ -14,6 +14,26 @@ The project is a Yarn workspaces monorepo with a **React** client, a **Node.js (
 - Search, filters and sort kept in the URL, so reloading or sharing a link restores the same view
 - Loading, empty and error states, light and dark themes, and a responsive layout for desktop and mobile
 
+## Screenshots
+
+### Scenario 1: Browsing the directory
+
+`/` — the default view with all 1,000 users sorted by first name. The sidebar ranks the top 20 hobbies and, below them, the top 20 nationalities, each with its count. The list loads more cards as you scroll.
+
+![Directory with all users and the top hobbies sidebar](docs/screenshots/directory.png)
+
+### Scenario 2: Search, filters and sort combined (dark theme)
+
+`/?q=al&hobby=Hiking&nationality=Emirati&sort=age&order=desc` — the text search, a nationality filter and a hobby filter apply together, sorted by age from oldest to youngest. The hobby and nationality counts in the sidebar update for the 8 matching users, and each active filter can be removed from the chips above the list. Opening this URL directly restores the same view.
+
+![Search, nationality and hobby filters with age sorting in dark mode](docs/screenshots/search-filters-sort.png)
+
+### Scenario 3: Nationality filters on mobile
+
+`/?hobby=Cooking&nationality=British&nationality=Mexican` — on small screens the sidebar moves into a drawer opened from the Filters button. With Cooking selected, the top 20 nationalities show how many people who cook come from each country. Selecting British (14) and Mexican (14) returns the 28 users from either nationality. The nationality counts still list the other countries, so more can be added to the selection.
+
+<img src="docs/screenshots/mobile-filters.png" alt="Mobile filter drawer with British and Mexican selected in the top nationalities" width="320">
+
 ## Tech stack
 
 | Layer | Technology |
@@ -278,6 +298,8 @@ server/
     app.ts        Express app (testable, no listen)
     index.ts      startup, auto-seed, graceful shutdown
   test/           node:test suites
+docs/
+  screenshots/    images used in this README
 Dockerfile        multi-stage build, non-root runtime
 docker-compose.yml
 dev.sh            development script
